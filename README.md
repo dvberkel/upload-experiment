@@ -31,3 +31,32 @@ You can install bundler with the following command
 To install the dependencies execute
 
     > bundle install
+
+Authentication
+--------------
+
+In order to communicate with Amazon you have to authenticate
+yourself. This should be done with an Amazon acces key id and the
+corresponding secret key.
+(See the 
+[Amazon
+documentation](https://payments.amazon.com/sdui/sdui/helpTab/Checkout-by-Amazon/Advanced-Integration-Help/Using-Your-Access-Key
+"Amazon on keys") for more information)
+
+It is of the utmost important that you do not share these keys. Other
+could use them and you would be billed. It is a best practice to
+refer to them via environment variables.
+
+For example when you create an `.amazon` file like so
+
+    export AMAZON_ACCESS_KEY_ID='abcdefghijklmnop'
+    export AMAZON_SECRET_ACCESS_KEY='1234567891012345'
+
+and incorporate the following inside a `.bashrc`
+
+    if [[ -f "$HOME/.amazon_keys" ]]; 
+    then
+        source "$HOME/.amazon_keys";
+    fi
+
+They will be available and used by the aws-s3 gem.
