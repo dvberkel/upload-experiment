@@ -16,6 +16,7 @@ AWS::S3::Base.establish_connection!(
 
 Service.buckets.each do |bucket|
   if (bucket.name == '37buckets') then
-    puts bucket.name
+    n = bucket.objects.size()
+    S3Object.store("README-#{n}.md", open("README.md"), bucket.name, :access => :public_read)
   end
 end
